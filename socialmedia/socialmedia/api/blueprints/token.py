@@ -1,63 +1,45 @@
-from flask import Blueprint, request, jsonify
-from flask_jwt_extended import create_access_token, create_refresh_token, get_jwt_identity, jwt_required, decode_token, \
-    get_jwt, set_access_cookies, set_refresh_cookies
+from flask import Blueprint, jsonify
+from flask_jwt_extended import get_jwt_identity, get_jti, jwt_required, \
+    set_access_cookies, set_refresh_cookies
 
-from setup.database import db
-from socialmedia.socialmedia.db.model import User
+from socialmedia.socialmedia.api.repositories import UserRepository
 from socialmedia.socialmedia.api.services import create_token_pair
 
-blueprint_token = Blueprint(name="blueprint_token", import_name=__name__)
+token_blueprint = Blueprint(name="token_blueprint", import_name=__name__)
 
 
-@blueprint_token.route('/token', methods=['POST'])
-def obtain_token_pair():
-    username = request.form.get('username')
-    password = request.form.get('password')
-
-    if not username or not password:
-        return jsonify({'message': 'bad data'}), 401
-
-    user = User.query.filter_by(username=username).first()
-    if not user:
-        return jsonify({'message': 'cannot find user with such username'}), 401
-
-    user_id = user.id
-
-    data = {
-        'username': username,
-        'id': user_id
-    }
-
-    access_token, refresh_token = create_token_pair(data=data)
-
-    user.refresh_token_jti = decode_token(refresh_token).get('jti')
-    db.session.commit()
-
-    resp = jsonify({'login': True})
-    set_access_cookies(resp, access_token)
-    set_refresh_cookies(resp, refresh_token)
-    return resp, 200
-
-
-@blueprint_token.route('/token/refresh', methods=['POST'])
+@token_blueprint.route('/refresh', methods=['GET'])
 @jwt_required(refresh=True)
 def refresh_token():
+    print('refresh')
     token_sub: dict = get_jwt_identity()
     user_id = token_sub.get('id')
 
     access_token, refresh_token = create_token_pair(data=token_sub)
 
-    user = User.query.filter_by(id=user_id).first()
-    user.refresh_token_jti = decode_token(refresh_token).get('jti')
-    db.session.commit()
+    user = UserRepository.get_by_id(id=user_id)
 
-    resp = jsonify({'login': True})
-    set_access_cookies(resp, access_token)
-    set_refresh_cookies(resp, refresh_token)
-    return resp, 200
+    refresh_token_jti = get_jti(encoded_token=refresh_token)
+
+    UserRepository.update(user, refresh_token_jti=refresh_token_jti)
+
+    response = jsonify(
+        {'success': True,
+         'user': {
+             'id': user.id,
+             'username': user.username
+         }})
+
+    response.set_cookie('access_token_cookie',
+                        value=access_token,
+                        httponly=False)
+    response.set_cookie('refresh_token_cookie',
+                        value=refresh_token,
+                        httponly=True)
+    return response, 200
 
 
-@blueprint_token.route('/test', methods=['GET'])
+@token_blueprint.route('/check', methods=['GET'])
 @jwt_required()
-def testing():
-    return 'It works'
+def check():
+    return jsonify({'success': True}), 200
