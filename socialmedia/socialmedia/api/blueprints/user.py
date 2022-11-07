@@ -5,7 +5,7 @@ from flask_jwt_extended import get_jwt_identity, get_jti, jwt_required, \
 from socialmedia.socialmedia.api.validators import UserRegistrationSchema
 from socialmedia.socialmedia.api.repositories import UserRepository
 from socialmedia.socialmedia.api.services import generate_password_hash
-from socialmedia.socialmedia.db import User
+from socialmedia.socialmedia.models import User
 
 user_blueprint = Blueprint(name="user_blueprint", import_name=__name__)
 

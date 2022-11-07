@@ -4,7 +4,6 @@ import logging
 from logging.config import fileConfig
 
 from flask import current_app
-from socialmedia.socialmedia.db import model
 from alembic import context
 
 # this is the Alembic Config object, which provides

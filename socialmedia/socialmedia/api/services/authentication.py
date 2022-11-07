@@ -1,6 +1,6 @@
 from typing import Optional
 
-from socialmedia.socialmedia.db import User
+from socialmedia.socialmedia.models import User
 from socialmedia.socialmedia.api.repositories import UserRepository
 from .security import check_password
 
