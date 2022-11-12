@@ -12,7 +12,10 @@ class Config:
 
 
 class DevelopmentConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + str(basedir / 'socialmedia' / dotenv_values().get('DATABASE_NAME'))
+    SQLALCHEMY_DATABASE_URI = f"postgresql://{dotenv_values().get('DATABASE_USER')}:" \
+                              f"{dotenv_values().get('DATABASE_PASSWORD')}@" \
+                              f"127.0.0.1:{dotenv_values().get('DATABASE_PORT')}/" \
+                              f"{dotenv_values().get('DATABASE_NAME')} "
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
