@@ -6,8 +6,8 @@ class User(db.Model):
     first_name = db.Column(db.String(30), nullable=False)
     last_name = db.Column(db.String(40), nullable=False)
     username = db.Column(db.String(30), nullable=False, unique=True)
-    email = db.Column(db.String(20), nullable=False, unique=True)
-    password_hash = db.Column(db.String(), nullable=False)
+    email = db.Column(db.String, nullable=False, unique=True)
+    password_hash = db.Column(db.String, nullable=False)
 
     user_tokens = db.relationship('UserTokens', backref='user', uselist=False, lazy=True)
 
