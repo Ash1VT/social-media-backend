@@ -13,3 +13,4 @@ class JWTConfig:
     JWT_CSRF_CHECK_FORM = False
     JWT_CSRF_IN_COOKIES = False
     JWT_COOKIE_CSRF_PROTECT = False
+    JWT_SESSION_COOKIE = False
