@@ -44,7 +44,7 @@ class UserService:
     @classmethod
     def add(cls, user_data: dict) -> User:
         errors = get_user_data_errors(user_data=user_data, check_missing_data=True)
-        print(errors)
+
         if len(errors):
             raise UserNotValidError(errors=errors)
 
