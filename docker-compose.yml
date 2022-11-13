@@ -3,14 +3,9 @@ services:
   postgres:
     image: postgres:13.3
     container_name: socialmedia-postgres-database
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: "socialmedia"
       POSTGRES_USER: "ash1vt"
       POSTGRES_PASSWORD: "12345"
     ports:
       - "5432:5432"
-
-volumes:
-  postgres_data:
