@@ -36,8 +36,8 @@ def register():
 
 
 @authentication_blueprint.route('/refresh', methods=['GET'])
-@jwt_required(refresh=True)
 @handle_app_errors
+@jwt_required(refresh=True)
 def refresh():
     user_id = int(get_jwt_identity().get('id'))
     access_token, refresh_token = AuthService.refresh_tokens(user_id=user_id)
@@ -48,8 +48,8 @@ def refresh():
 
 
 @authentication_blueprint.route('/logout', methods=['GET'])
-@jwt_required()
 @handle_app_errors
+@jwt_required()
 def logout():
     user_id = int(get_jwt_identity().get('id'))
     AuthService.logout(user_id=user_id)

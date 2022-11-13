@@ -33,7 +33,7 @@ MIN_PASSWORD_ERROR_STRING = f'Password must have at least {MIN_PASSWORD_LENGTH} 
 MAX_PASSWORD_ERROR_STRING = f'Password must have at least {MAX_PASSWORD_LENGTH} characters'
 
 
-USER_NOT_FOUND_ERROR_STRING = 'Username is not valid'
+USER_NOT_FOUND_ERROR_STRING = 'Cannot find user'
 USER_NOT_VALID_ERROR_STRING = 'User data is invalid'
 USER_ALREADY_EXISTS_ERROR_STRING = 'User already exists'
 USER_UNAUTHENTICATED_ERROR_STRING = 'User\'s password is not valid'

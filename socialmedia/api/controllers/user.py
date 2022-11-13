@@ -28,8 +28,8 @@ def get_all_users():
 
 
 @user_blueprint.route('/current', methods=['GET'])
-@jwt_required()
 @handle_app_errors
+@jwt_required()
 def get_current_user():
     token_sub: dict = get_jwt_identity()
     user_id = token_sub.get('id')
@@ -40,8 +40,8 @@ def get_current_user():
 
 
 @user_blueprint.route('/<id>', methods=['PUT'])
-@jwt_required()
 @handle_app_errors
+@jwt_required()
 def update_user(id: str):
     request_body = check_request_content_type(request=request)
     user_id = verify_id_in_token_identity(user_id=id, token_identity=get_jwt_identity())
@@ -51,8 +51,8 @@ def update_user(id: str):
 
 
 @user_blueprint.route('/<id>', methods=['PATCH'])
-@jwt_required()
 @handle_app_errors
+@jwt_required()
 def patch_user(id: str):
     request_body = check_request_content_type(request=request)
     user_id = verify_id_in_token_identity(user_id=id, token_identity=get_jwt_identity())
@@ -62,8 +62,8 @@ def patch_user(id: str):
 
 
 @user_blueprint.route('/<id>', methods=['DELETE'])
-@jwt_required()
 @handle_app_errors
+@jwt_required()
 def delete_user(id: str):
     user_id = verify_id_in_token_identity(user_id=id, token_identity=get_jwt_identity())
     UserService.delete(user_id=user_id)
