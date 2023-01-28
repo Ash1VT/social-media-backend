@@ -59,7 +59,6 @@ class UserRepository(BaseRepository):
     @classmethod
     def delete(cls, user_id: int) -> User:
         user = cls.get_by_id(user_id=user_id)
-        db.session.delete(user.user_tokens)
         db.session.delete(user)
         cls.commit()
         return user
