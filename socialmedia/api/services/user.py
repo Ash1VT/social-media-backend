@@ -57,9 +57,9 @@ class UserService:
         password_hash: str = hash_password(password=password)
 
         exist_field_names = list()
-        if UserRepository.exists_with_username(username=username):
+        if cls.exists_with_username(username=username):
             exist_field_names.append(User.username.name)
-        if UserRepository.exists_with_email(email=email):
+        if cls.exists_with_email(email=email):
             exist_field_names.append(User.email.name)
 
         if len(exist_field_names):
@@ -70,7 +70,7 @@ class UserService:
 
     @classmethod
     def update(cls, user_id: int, user_data: dict) -> User:
-        if not UserRepository.exists_with_id(user_id=user_id):
+        if not cls.exists_with_id(user_id=user_id):
             raise UserNotFoundError(field=User.id.name)
 
         errors = get_user_data_errors(user_data=user_data, check_missing_data=True)
@@ -86,9 +86,9 @@ class UserService:
         password_hash: str = hash_password(password=password)
 
         exist_field_names = list()
-        if UserRepository.exists_with_username(username=username):
+        if cls.exists_with_username(username=username):
             exist_field_names.append(User.username.name)
-        if UserRepository.exists_with_email(email=email):
+        if cls.exists_with_email(email=email):
             exist_field_names.append(User.email.name)
 
         if len(exist_field_names):
@@ -99,7 +99,7 @@ class UserService:
 
     @classmethod
     def patch(cls, user_id: int, user_data: dict) -> User:
-        if not UserRepository.exists_with_id(user_id=user_id):
+        if not cls.exists_with_id(user_id=user_id):
             raise UserNotFoundError(field=User.id.name)
 
         errors = get_user_data_errors(user_data=user_data, check_missing_data=False)
@@ -117,9 +117,9 @@ class UserService:
             password_hash = hash_password(password=password)
 
         exist_field_names = list()
-        if username and UserRepository.exists_with_username(username=username):
+        if username and cls.exists_with_username(username=username):
             exist_field_names.append(User.username.name)
-        if email and UserRepository.exists_with_email(email=email):
+        if email and cls.exists_with_email(email=email):
             exist_field_names.append(User.email.name)
 
         if len(exist_field_names):
@@ -130,7 +130,7 @@ class UserService:
 
     @classmethod
     def update_user_tokens(cls, user_id: int, access_token_jti: str, refresh_token_jti: str) -> User:
-        if not UserRepository.exists_with_id(user_id=user_id):
+        if not cls.exists_with_id(user_id=user_id):
             raise UserNotFoundError(field=User.id.name)
 
         return UserRepository.update(user_id=user_id, access_token_jti=access_token_jti,
@@ -138,7 +138,19 @@ class UserService:
 
     @classmethod
     def delete(cls, user_id: int) -> User:
-        if not UserRepository.exists_with_id(user_id=user_id):
+        if not cls.exists_with_id(user_id=user_id):
             raise UserNotFoundError(field=User.id.name)
 
         return UserRepository.delete(user_id=user_id)
+
+    @classmethod
+    def exists_with_id(cls, user_id: int) -> bool:
+        return UserRepository.exists_with_id(user_id=user_id)
+
+    @classmethod
+    def exists_with_username(cls, username: str) -> bool:
+        return UserRepository.exists_with_username(username=username)
+
+    @classmethod
+    def exists_with_email(cls, email: str) -> bool:
+        return UserRepository.exists_with_email(email=email)
