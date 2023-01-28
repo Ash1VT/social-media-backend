@@ -5,6 +5,8 @@ from setup import db
 from socialmedia.models import Comment, User, Post
 from socialmedia.api.repositories.base import BaseRepository
 
+__all__ = ['CommentRepository']
+
 
 class CommentRepository(BaseRepository):
 
