@@ -1,3 +1,2 @@
-from .user import *
+from .numeric import *
 from .string import *
-from .response import *
