@@ -1,6 +1,10 @@
 from datetime import datetime
 from setup.database import db
 
+
+__all__ = ['User', 'UserTokens', 'Post', 'Comment']
+
+
 user_liked_posts = db.Table('UserLikedPosts',
                             db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
                             db.Column('post_id', db.Integer, db.ForeignKey('post.id')),
