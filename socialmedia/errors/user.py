@@ -5,10 +5,10 @@ from flask import Response
 
 from .base import AppError
 from ..responses import get_user_not_found_response, get_user_not_valid_response, get_user_already_exists_response, \
-    get_user_unauthenticated_response, get_user_requesting_invalid_id_response, get_user_requesting_another_id_response
+    get_user_unauthenticated_response, get_user_requesting_foreign_user_id_response
 
 __all__ = ['UserNotFoundError', 'UserNotValidError', 'UserUnauthenticatedError', 'UserAlreadyExistsError',
-           'UserRequestingInvalidIdError', 'UserRequestingForeignIdError']
+           'UserRequestingForeignUserIdError']
 
 
 class UserError(AppError, ABC):
@@ -68,17 +68,9 @@ class UserUnauthenticatedError(UserError):
         return get_user_unauthenticated_response()
 
 
-class UserRequestingInvalidIdError(UserError):
-    """Raised when user is requesting to invalid user id"""
-
-    @property
-    def response(self) -> Tuple[Response, int]:
-        return get_user_requesting_invalid_id_response()
-
-
-class UserRequestingForeignIdError(UserError):
+class UserRequestingForeignUserIdError(UserError):
     """Raised when user is requesting to foreign user id"""
 
     @property
     def response(self) -> Tuple[Response, int]:
-        return get_user_requesting_another_id_response()
+        return get_user_requesting_foreign_user_id_response()
