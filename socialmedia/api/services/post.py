@@ -9,6 +9,8 @@ from socialmedia.api.repositories import PostRepository
 
 from .user import UserService
 
+__all__ = ['PostService']
+
 
 class PostService:
 

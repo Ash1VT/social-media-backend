@@ -7,6 +7,8 @@ from socialmedia.errors import CommentNotFoundError, CommentNotValidError, Comme
     CommentAlreadyDislikedError, CommentAlreadyLikedError, CommentNotLikedError, UserNotFoundError, PostNotFoundError
 from socialmedia.utils import get_comment_data_errors
 
+__all__ = ['CommentService']
+
 
 class CommentService:
 
