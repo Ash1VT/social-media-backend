@@ -1,0 +1,15 @@
+# Virtual environment
+venv/
+
+# Pycharm files
+.idea/
+**/__pycache__/
+
+# Databases
+**/sqllite.db
+
+# Environment variables
+.env
+
+# Makefile
+Makefile
