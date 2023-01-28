@@ -6,7 +6,7 @@ __all__ = ['JWTConfig']
 
 
 class JWTConfig:
-    JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=5)
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=2)
     JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=2)
     JWT_SECRET_KEY = dotenv_values().get('SECRET_KEY')
     JWT_TOKEN_LOCATION = ['cookies']
