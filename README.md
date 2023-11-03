@@ -91,7 +91,7 @@ Run server
   flask run
 ```
 
-## Testing the API with Postman
+# Testing the API with Postman
 To test the API of our Social Media App, it is recommended to use Postman, a popular and user-friendly API testing tool. 
 A Postman collection have been provided in the **"documentation"** folder of this repository, which includes pre-configured requests to interact with various API endpoints.
 
