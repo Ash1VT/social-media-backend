@@ -63,7 +63,7 @@ You can see all provided exceptions in **"errors"** folder in source code.
 Clone the project
  
 ```bash
-  git clone --branch develop https://github.com/ash1vt/social-media-backend
+  git clone https://github.com/ash1vt/social-media-backend
 ```
 
 Install dependencies
