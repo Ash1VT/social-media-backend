@@ -1,10 +1,10 @@
 # Social Media Backend
 
-Well-structured pet project written on Flask using onion architecture (repository-service-api) which illustrates user's social media life through ability leaving posts and comments.
+Well-structured pet project written on **Flask** using onion architecture (repository-service-api) which illustrates user's social media life through ability leaving posts and comments.
 
 # Project Description
 
-The **"SocialMedia"** project is a Flask project that aims to illustrate a user's social media life through the ability to create, view, like and dislike posts and comments. 
+The **"SocialMedia"** project is a **Flask** project that aims to illustrate a user's social media life through the ability to create, view, like and dislike posts and comments. 
 The application follows the **Onion Architecture** design pattern, which emphasizes the separation of concerns by dividing the application into layers: repository, service, and API. 
 It also implements a robust authentication process using **JWT (JSON Web Tokens)** for secure user access and authorization. 
 JWT tokens are located in Cookies. 
